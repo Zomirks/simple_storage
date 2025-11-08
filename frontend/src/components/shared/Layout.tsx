@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 
-const Layout = ({ children }) => {
+const Layout = ({ children } : { children: React.ReactNode }) => {
     return (
         <div className="flex flex-col h-screen">
             <Header />
