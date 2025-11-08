@@ -8,7 +8,8 @@ const NotConnected = () => {
             <AlertCircleIcon />
             <AlertTitle>Warning</AlertTitle>
             <AlertDescription>
-                Please connect your Wallet to our DApp.
+              Please connect your Web3 wallet (e.g., MetaMask) to interact with the smart contract.
+              Click the &quot;Connect Wallet&quot; button in the header to get started.
             </AlertDescription>
         </Alert>
     </>
