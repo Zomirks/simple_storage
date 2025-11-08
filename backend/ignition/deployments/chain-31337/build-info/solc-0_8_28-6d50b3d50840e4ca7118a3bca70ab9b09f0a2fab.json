@@ -1,0 +1,39 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-6d50b3d50840e4ca7118a3bca70ab9b09f0a2fab",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "userSourceNameMap": {
+    "contracts/SimpleStorage.sol": "project/contracts/SimpleStorage.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers",
+            "metadata"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/SimpleStorage.sol": {
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.28;\n\ncontract SimpleStorage {\n    uint private storedNumber;\n\n    event NumberChanged(uint oldValue, uint newValue);\n\n    function store(uint _number) public {\n        emit NumberChanged(storedNumber, _number);\n        storedNumber = _number;\n    }\n\n    function retrieve() public view returns (uint) {\n        return storedNumber;\n    }\n}"
+      }
+    }
+  }
+}

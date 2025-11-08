@@ -1,0 +1,59 @@
+{
+  "_format": "hh3-artifact-1",
+  "contractName": "SimpleStorage",
+  "sourceName": "contracts/SimpleStorage.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "oldValue",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newValue",
+          "type": "uint256"
+        }
+      ],
+      "name": "NumberChanged",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "retrieve",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_number",
+          "type": "uint256"
+        }
+      ],
+      "name": "store",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600e575f5ffd5b5060e48061001b5f395ff3fe6080604052348015600e575f5ffd5b50600436106030575f3560e01c80632e64cec11460345780636057361d146048575b5f5ffd5b5f5460405190815260200160405180910390f35b605760533660046098565b6059565b005b5f5460408051918252602082018390527f31431e8e0193815c649ffbfb9013954926640a5c67ada972108cdb5a47a0d728910160405180910390a15f55565b5f6020828403121560a7575f5ffd5b503591905056fea2646970667358221220fd7e56f5d93af1f906cd63e1e319adbfffe0d211f0331d70f91e0be3df96397e64736f6c634300081c0033",
+  "deployedBytecode": "0x6080604052348015600e575f5ffd5b50600436106030575f3560e01c80632e64cec11460345780636057361d146048575b5f5ffd5b5f5460405190815260200160405180910390f35b605760533660046098565b6059565b005b5f5460408051918252602082018390527f31431e8e0193815c649ffbfb9013954926640a5c67ada972108cdb5a47a0d728910160405180910390a15f55565b5f6020828403121560a7575f5ffd5b503591905056fea2646970667358221220fd7e56f5d93af1f906cd63e1e319adbfffe0d211f0331d70f91e0be3df96397e64736f6c634300081c0033",
+  "linkReferences": {},
+  "deployedLinkReferences": {},
+  "immutableReferences": {},
+  "inputSourceName": "project/contracts/SimpleStorage.sol",
+  "buildInfoId": "solc-0_8_28-6d50b3d50840e4ca7118a3bca70ab9b09f0a2fab"
+}
