@@ -7,11 +7,7 @@ import { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { CheckCircle2Icon } from "lucide-react"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-
-// Constantes du smart contract (adresse et ABI)
-import { CONTRACT_ADDRESS, CONTRACT_ABI } from "@/utils/constants";
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 // Hooks Wagmi pour interagir avec la blockchain
 import { type BaseError, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
@@ -19,6 +15,9 @@ import { type BaseError, useReadContract, useWriteContract, useWaitForTransactio
 // Viem pour créer un client qui lit les événements de la blockchain
 import { publicClient } from "@/lib/client";
 import { parseAbiItem } from "viem";
+
+// Constantes du smart contract (adresse et ABI)
+import { CONTRACT_ADDRESS, CONTRACT_ABI } from "@/utils/constants";
 
 // Composant pour afficher l'historique des transactions
 import Events from "./Events";
@@ -29,6 +28,7 @@ interface SimpleStorageEvent {
     number: string;  // Nombre enregistré
 }
 
+// Composant principal qui gère l'interaction avec le smart contract
 const SimpleStorage = () => {
 
     // États locaux pour gérer le formulaire et les données
@@ -45,6 +45,25 @@ const SimpleStorage = () => {
         abi: CONTRACT_ABI,             // Interface du contrat (liste des fonctions)
         functionName: 'getMyNumber',   // Fonction à appeler sur le contrat
     });
+
+    // Fonction pour récupérer tous les événements émis par le smart contract
+    const getEvents = async() => {
+        // Récupère tous les événements "NumberChanged" depuis le début (block 0) jusqu'à maintenant
+        const numberChangedEvents = await publicClient.getLogs({
+            address: CONTRACT_ADDRESS,
+            event: parseAbiItem('event NumberChanged(address indexed by, uint256 number)'),
+            fromBlock: 0n,        // Depuis le premier block
+            toBlock: 'latest'     // Jusqu'au dernier block miné
+        });
+
+        // Transforme les événements bruts en objets simples pour l'affichage
+        setEvents(numberChangedEvents.map((event) => {
+            return {
+                by: event.args.by as string,                    // Adresse du wallet
+                number: event.args.number?.toString() || '0'    // Convertit le BigInt en string
+            }
+        }))
+    }
 
     // Fonction appelée quand l'utilisateur clique sur "Submit to Blockchain"
     const handleSetNumber = async() => {
@@ -96,9 +115,16 @@ const SimpleStorage = () => {
     useEffect(() => {
         if (isConfirmed) {
             refetch();              // Recharge le nombre depuis le contrat
+            getEvents();            // Recharge l'historique des transactions
             setInputNumber('');     // Vide le champ de saisie
         }
     }, [isConfirmed, refetch])
+
+    // useEffect : s'exécute une seule fois au chargement du composant
+    // Charge l'historique des transactions au démarrage
+    useEffect(() => {
+        getEvents();
+    }, [])
 
     // Affiche un état de chargement pendant la lecture du contrat
     if (readIsPending) return <div className="p-6 text-center">Loading your stored number...</div>
@@ -195,6 +221,9 @@ const SimpleStorage = () => {
                         {writeIsPending || isConfirming ? 'Processing...' : 'Submit to Blockchain'}
                     </Button>
                 </div>
+
+                {/* Affichage de l'historique des transactions */}
+                <Events events={events} />
             </div>
         </>
     )
