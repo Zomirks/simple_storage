@@ -49,7 +49,7 @@ const SimpleStorage = () => {
     // Fonction appelée quand l'utilisateur clique sur "Submit to Blockchain"
     const handleSetNumber = async() => {
         setValidationError(''); // Réinitialise les erreurs précédentes
-        console.log(inputNumber);
+
         // Validation 1 : Vérifie que l'input n'est pas vide
         if (!inputNumber || inputNumber.trim() === '') {
             setValidationError('Please enter a number');
@@ -103,6 +103,53 @@ const SimpleStorage = () => {
 
             {/* Section 2 : Formulaire pour modifier le nombre */}
             <div className="p-6 border border-border rounded-lg bg-card mt-5">
+                {/* Alerte : Transaction envoyée (affiche le hash) */}
+                {hash && (
+                    <Alert className="mb-4">
+                        <AlertDescription>
+                            <div className="font-semibold mb-1">Transaction sent!</div>
+                            <div className="text-xs break-all">Hash: {hash}</div>
+                        </AlertDescription>
+                    </Alert>
+                )}
+
+                {/* Alerte : En attente de confirmation par la blockchain */}
+                {isConfirming && (
+                    <Alert className="mb-4">
+                        <AlertDescription>
+                            Waiting for blockchain confirmation... This may take a few seconds.
+                        </AlertDescription>
+                    </Alert>
+                )}
+
+                {/* Alerte : Transaction confirmée avec succès */}
+                {isConfirmed && (
+                    <Alert className="mb-4 border-green-600 bg-green-500/10">
+                        <AlertDescription className="text-foreground">
+                            ✅ Transaction confirmed! Your number has been updated on the blockchain.
+                        </AlertDescription>
+                    </Alert>
+                )}
+
+                {/* Alerte : Erreur de validation (input invalide) */}
+                {validationError && (
+                    <Alert variant="destructive" className="mb-4">
+                        <AlertDescription>
+                            {validationError}
+                        </AlertDescription>
+                    </Alert>
+                )}
+
+                {/* Alerte : Erreur blockchain (transaction rejetée ou échouée) */}
+                {writeError && (
+                    <Alert variant="destructive" className="mb-4">
+                        <AlertDescription>
+                            <div className="font-semibold mb-1">Transaction failed</div>
+                            <div className="text-sm">{(writeError as BaseError).shortMessage || writeError.message}</div>
+                        </AlertDescription>
+                    </Alert>
+                )}
+
                 {/* Formulaire de saisie */}
                 <div className="space-y-4">
                     <div className="space-y-2">
