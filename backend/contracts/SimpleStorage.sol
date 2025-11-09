@@ -2,16 +2,16 @@
 pragma solidity 0.8.28;
 
 contract SimpleStorage {
-    uint private storedNumber;
+    uint256 private myNumber;
 
-    event NumberChanged(uint oldValue, uint newValue);
+    event NumberChanged(address indexed by, uint256 number);
 
-    function store(uint _number) public {
-        emit NumberChanged(storedNumber, _number);
-        storedNumber = _number;
+    function setMyNumber(uint256 _myNumber) external {
+        myNumber = _myNumber;
+        emit NumberChanged(msg.sender, _myNumber);
     }
 
-    function retrieve() public view returns (uint) {
-        return storedNumber;
+    function getMyNumber() external view returns (uint256) {
+        return myNumber;
     }
 }

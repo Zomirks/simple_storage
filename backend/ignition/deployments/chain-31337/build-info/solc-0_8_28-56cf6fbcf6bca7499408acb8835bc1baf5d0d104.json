@@ -1,6 +1,6 @@
 {
   "_format": "hh3-sol-build-info-1",
-  "id": "solc-0_8_28-6d50b3d50840e4ca7118a3bca70ab9b09f0a2fab",
+  "id": "solc-0_8_28-56cf6fbcf6bca7499408acb8835bc1baf5d0d104",
   "solcVersion": "0.8.28",
   "solcLongVersion": "0.8.28+commit.7893614a",
   "userSourceNameMap": {
@@ -32,7 +32,7 @@
     },
     "sources": {
       "project/contracts/SimpleStorage.sol": {
-        "content": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.28;\n\ncontract SimpleStorage {\n    uint private storedNumber;\n\n    event NumberChanged(uint oldValue, uint newValue);\n\n    function store(uint _number) public {\n        emit NumberChanged(storedNumber, _number);\n        storedNumber = _number;\n    }\n\n    function retrieve() public view returns (uint) {\n        return storedNumber;\n    }\n}"
+        "content": "// SPDX-License-Identifier: MIT\npragma solidity 0.8.28;\n\ncontract SimpleStorage {\n    uint256 private myNumber;\n\n    event NumberChanged(address indexed by, uint256 number);\n\n    function setMyNumber(uint256 _myNumber) external {\n        myNumber = _myNumber;\n        emit NumberChanged(msg.sender, _myNumber);\n    }\n\n    function getMyNumber() external view returns (uint256) {\n        return myNumber;\n    }\n}"
       }
     }
   }
