@@ -92,6 +92,14 @@ const SimpleStorage = () => {
         hash,  // Hash de la transaction à surveiller
     })
 
+    // useEffect : s'exécute automatiquement quand isConfirmed change
+    useEffect(() => {
+        if (isConfirmed) {
+            refetch();              // Recharge le nombre depuis le contrat
+            setInputNumber('');     // Vide le champ de saisie
+        }
+    }, [isConfirmed, refetch])
+
     // Affiche un état de chargement pendant la lecture du contrat
     if (readIsPending) return <div className="p-6 text-center">Loading your stored number...</div>
 
