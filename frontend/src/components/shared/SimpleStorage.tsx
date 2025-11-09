@@ -92,6 +92,21 @@ const SimpleStorage = () => {
         hash,  // Hash de la transaction à surveiller
     })
 
+    // Affiche un état de chargement pendant la lecture du contrat
+    if (readIsPending) return <div className="p-6 text-center">Loading your stored number...</div>
+
+    // Affiche une erreur si impossible de lire le contrat (problème de réseau ou contrat non déployé)
+    if (readError)
+    return (
+      <div className="p-6">
+        <Alert variant="destructive">
+            <AlertDescription>
+                Unable to read from smart contract. Make sure you are connected to the correct network (Hardhat local network).
+            </AlertDescription>
+        </Alert>
+      </div>
+    )
+
     return (
         <>
             {/* Section 1 : Affiche le nombre actuellement stocké dans le smart contract */}
