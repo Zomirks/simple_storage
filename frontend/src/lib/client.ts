@@ -15,6 +15,6 @@ import { hardhat, sepolia } from "viem/chains";
 
 // Création du client connecté à la blockchain Hardhat locale
 export const publicClient = createPublicClient({
-    chain: hardhat,      // Réseau Hardhat (localhost:8545)
+    chain: sepolia,      // Réseau Hardhat (localhost:8545)
     transport: http()    // Communication via HTTP (RPC)
 })

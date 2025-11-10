@@ -52,7 +52,7 @@ const SimpleStorage = () => {
         const numberChangedEvents = await publicClient.getLogs({
             address: CONTRACT_ADDRESS,
             event: parseAbiItem('event NumberChanged(address indexed by, uint256 number)'),
-            fromBlock: 0n,        // Depuis le premier block
+            fromBlock: 9600264n,        // Depuis le premier block
             toBlock: 'latest'     // Jusqu'au dernier block miné
         });
 
@@ -135,7 +135,7 @@ const SimpleStorage = () => {
       <div className="p-6">
         <Alert variant="destructive">
             <AlertDescription>
-                Unable to read from smart contract. Make sure you are connected to the correct network (Hardhat local network).
+                Unable to read from smart contract. Make sure you are connected to the correct network (Sepolia network).
             </AlertDescription>
         </Alert>
       </div>
