@@ -38,7 +38,7 @@ const Events = ({ events } : { events: SimpleStorageEvent[] }) => {
               className="flex items-center justify-between p-3 border border-border rounded-md bg-muted/30 hover:bg-muted/50 transition-colors"
             >
               {/* Adresse du wallet qui a effectué la transaction */}
-              <div className="flex align-center gap-1">
+              <div className="flex items-center gap-1">
                 <Badge variant="default">setMyNumber</Badge>
                 <span className="text-xs text-muted-foreground">
                   By: <span className="font-mono">{shortenAddress(event.by)}</span>
