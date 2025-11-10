@@ -4,9 +4,9 @@
 import { useState, useEffect } from "react";
 
 // Imports des composants UI de shadcn
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert"
 
 // Hooks Wagmi pour interagir avec la blockchain
